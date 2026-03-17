@@ -1,16 +1,29 @@
 import { Outlet } from "react-router-dom"
 import Header from "./Header"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import productContext from "../utils/productContext"
+
+
+
 
 const App=()=>{
+    const[products,setProducts]=useState([])  
     useEffect(()=>{
-        const data=fetch()
+getData(); 
     },[])
+const getData=async()=>{
+     const data=await fetch("https://dummyjson.com/products");
+    const dataJson=await data.json();
+    setProducts(dataJson.products)
+    // console.log(dataJson.products)
+}
     return(
+        <productContext.Provider value={{products}}>
         <div>
             <Header/>
             <Outlet/>
         </div>
+        </productContext.Provider>
     )
 }
 
