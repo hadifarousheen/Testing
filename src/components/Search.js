@@ -8,7 +8,7 @@ const Search=()=>{
             setSearchText(e.target.value)
         }} />
         <button className="border px-2 py-1 rounded-lg font-bold" onClick={()=>{
-            const filterdProduct=originalProducts?.filter((product)=>product.title.includes(searchText));
+            const filterdProduct=originalProducts?.filter((product)=>product.title.toLowerCase().includes(searchText.toLowerCase()));
             setProducts(filterdProduct)
         }}>Search</button>
     </div>)

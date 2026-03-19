@@ -2,6 +2,8 @@ import { Outlet } from "react-router-dom"
 import Header from "./Header"
 import { useEffect, useState } from "react"
 import productContext from "../utils/productContext"
+import { Provider } from "react-redux"
+import appStore from "../utils/appStore"
 
 
 
@@ -21,12 +23,14 @@ const getData=async()=>{
     // console.log(dataJson.products)
 }
     return(
+        <Provider store={appStore}>
         <productContext.Provider value={{products,searchText,setSearchText,setProducts,originalProducts,setOriginalProducts}}>
         <div>
             <Header/>
             <Outlet/>
         </div>
         </productContext.Provider>
+        </Provider>
     )
 }
 
