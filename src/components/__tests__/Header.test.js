@@ -7,6 +7,20 @@ import { BrowserRouter } from "react-router-dom";
 import Body from "../Body.js";
 import Item from "../Item.js";
 import productContext from "../../utils/productContext.js";
+import MOCK_DATA from "../../mocks/itemCardMock.json";
+
+beforeAll(()=>{
+    console.log("Before All")
+})
+beforeEach(()=>{
+    console.log(("Before Each"))
+})
+afterAll(()=>{
+    console.log("After All")
+})
+afterEach(()=>{
+    console.log("After Each")
+})
 
 
 it("should load the Header component with a login button",()=>{
@@ -51,22 +65,26 @@ it("should change the login button to logout and vice-versa on click",()=>{
     expect(loginButton).toBeInTheDocument()
 })
 
-// it("should load all the products when clicked on the get all products button",()=>{
-//     render(
+test("should load all the products when clicked on the get all products button",()=>{
+    render(
         
-//     <BrowserRouter>
-//     <productContext.Provider>
-//     <Provider store={appStore}>
-//         <Header/>
-//         <Body/>
-//         <Item/>
-//     </Provider>
-//     </productContext.Provider>
-//         </BrowserRouter>
-//     )
-//     const productsButton=screen.getByRole("button",{name:"Get All Products"})
-//     expect(productsButton).toBeInTheDocument();
-//     fireEvent.click(productsButton)
-//     const productNumber=screen.getAllByTestId("prodCard");
-//     expect(productNumber.length).toBe(20);
-// })
+    <BrowserRouter>
+    <productContext.Provider  value={{
+    products: MOCK_DATA,
+    setProducts: jest.fn(),
+    originalProducts: MOCK_DATA,
+  }}>
+    <Provider store={appStore}>
+        <Header />
+        <Body/>
+        {/* <Item products={MOCK_DATA}/> */}
+    </Provider>
+    </productContext.Provider>
+        </BrowserRouter>
+    )
+    const productsButton=screen.getByRole("button",{name:"Get All Products"})
+    expect(productsButton).toBeInTheDocument();
+    fireEvent.click(productsButton)
+    const productNumber=screen.getAllByTestId("prodCard");
+    expect(productNumber.length).toBe(30);
+})
