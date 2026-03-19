@@ -2,6 +2,7 @@ import { useContext } from "react";
 import productContext from "../utils/productContext";
 import Item from "./Item";
 import Search from "./Search";
+import { Link } from "react-router-dom";
 
 const Body=()=>{
     const{products}=useContext(productContext)
@@ -11,7 +12,7 @@ const Body=()=>{
             <Search/>
         </div>
         <div className="flex flex-wrap justify-center">{products?.map((product)=>{
-           return <Item product={product} key={product?.id}/>
+           return <Link to={"/product/"+product?.id} key={product?.id} state={{product:product}}><Item product={product} key={product?.id}/></Link>
         })}</div>
         
     </div>)
