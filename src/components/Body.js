@@ -12,7 +12,7 @@ const Body=()=>{
             <Search/>
         </div>
         <div className="flex flex-wrap justify-center">{products?.map((product)=>{
-           return <Link to={"/product/"+product?.id} key={product?.id} state={{product:product}}><Item product={product} key={product?.id}/></Link>
+           return <Link to={"/product/"+product?.id} key={product?.id} state={{product:product}} data-testid="prodCard"><Item product={product} key={product?.id}/></Link>
         })}</div>
         
     </div>)
